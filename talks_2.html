@@ -1,0 +1,123 @@
+<head>
+	<title>JS Channel - Talks</title>
+</head>
+	
+<body>
+	<div class="container">
+		{{> header}}
+
+		<hr>
+
+		<div class="row content">
+			{{> add_talk }}
+
+			{{> listing}}
+		</div>
+	</div>	
+</body>
+
+<template name="header">
+	<div class="well">
+		<h2>
+			JS Channel
+			<small>
+				{{ loginButtons }}
+			</small>
+		</h2>
+	</div>
+</template>
+
+<template name="add_talk">
+	<form class="span4">
+		<div>
+			<label>
+				Title <br>
+				<input type="text" class="title" name="title">
+			</label>
+		</div>
+
+		<div>
+			<label>
+				Time <br>
+				<input type="text" class="time" name="time">
+			</label>
+		</div>
+
+		<div>
+			<label>
+				Description <br>
+				<textarea name="description" class="description"></textarea>
+			</label>
+		</div>
+
+		<div>
+			<label>
+				Speaker Name <br>
+				<input type="text" class="speaker_name" name="speaker_name">
+			</label>
+		</div>
+
+
+		<div>
+			<label>
+				Speaker Bio <br>
+				<textarea name="speaker_bio" class="speaker_bio"></textarea>
+			</label>
+		</div>
+
+		<div>
+			<input type="submit" class="btn btn-large btn-primary" value="Add Talk">
+		</div>
+	</form>
+</template>
+
+
+<template name="listing">
+	<div class="span8">
+		<h2>List</h2>
+		<hr>
+
+		<ul class="unstyled">
+			{{#each talks}}
+				{{> talk}}
+			{{/each}}
+		</ul>
+	</div>
+</template>
+
+
+<template name="talk">
+	<li>
+		{{#if currentUser }}
+			<div class="row">
+				<div class="span12">
+					<a href="#" class="btn btn-danger delete">Delete Talk</a>
+				</div>
+			</div>
+		{{/if}}
+
+		<div class="row">
+			<div class="span4">
+				<h3>
+					{{title}} - {{time}}
+				</h3>
+
+				<h4>
+					By: {{ speaker_name }} - 
+					<small>
+						{{speaker_bio}}
+					</small>
+				</h4>
+			
+				<p>{{description}}</p>
+			</div>
+
+			<div class="span3 well">
+				<h3>Votes: {{votes}}</h3>
+				<button type="button" class="btn btn-success upvote">Upvote</button>
+				<button type="button" class="btn btn-danger downvote">Downvote</button>
+			</div>
+		</div>
+
+	</li>
+</template>
